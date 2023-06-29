@@ -1,5 +1,7 @@
 /* AudioLinkSync, Teensy 4.0
  * by DrAndyHaas, June 2023
+ * 
+ * Compile with Tools->CPU Speed = 150 MHz for lower power consumption 
 */
 
 #include <Audio.h>
@@ -22,16 +24,31 @@
 #define OLED_RESET 21
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
+#include <Audio.h>
+#include <Wire.h>
+#include <SPI.h>
+#include <SD.h>
+#include <SerialFlash.h>
+
 // GUItool: begin automatically generated code
-AsyncAudioInputSPDIF3    spdif_async_in;   //xy=313,298
-AudioEffectDelay         delay0;         //xy=707,293
-AudioEffectDelay         delay1;         //xy=707,424
-AudioOutputSPDIF3        spdif3_out;       //xy=1044,294
+AsyncAudioInputSPDIF3    spdif_async_in; //xy=261,205
+AudioEffectDelay         delay0;         //xy=655,200
+AudioEffectDelay         delay1;         //xy=655,331
+AudioOutputSPDIF3        spdif3_out;     //xy=992,201
+AudioAnalyzeRMS          rms0;           //xy=996,372
+AudioAnalyzePeak         peak0;          //xy=997,297
+AudioAnalyzePeak         peak1;          //xy=998,453
+AudioAnalyzeRMS          rms1;           //xy=999,528
 AudioConnection          patchCord1(spdif_async_in, 0, delay0, 0);
 AudioConnection          patchCord2(spdif_async_in, 1, delay1, 0);
 AudioConnection          patchCord3(delay0, 0, spdif3_out, 0);
-AudioConnection          patchCord4(delay1, 0, spdif3_out, 1);
+AudioConnection          patchCord4(delay0, 0, peak0, 0);
+AudioConnection          patchCord5(delay0, 0, rms0, 0);
+AudioConnection          patchCord6(delay1, 0, spdif3_out, 1);
+AudioConnection          patchCord7(delay1, 0, peak1, 0);
+AudioConnection          patchCord8(delay1, 0, rms1, 0);
 // GUItool: end automatically generated code
+
 
 bool changingdelay = false;
 bool firstloop = true;
@@ -101,12 +118,30 @@ void loop() {
   display.write(buf);
   display.write("\n");
   
+  /*
   double bufferedTime=spdif_async_in.getBufferedTime();
   dtostrf(bufferedTime*1e3,7,4,buf);
   display.write("buf (ms): ");
   display.write(buf);
   display.write("\n");
+  */
 
+  double peakL=peak0.read();
+  double peakR=peak1.read();
+  dtostrf(max(peakL,peakR),5,4,buf);
+  display.write("peak vol: ");
+  display.write(buf);
+  display.write("\n");
+
+  /*
+  double rmsL=rms0.read();
+  double rmsR=rms1.read();
+  dtostrf(max(rmsL,rmsR),5,4,buf);
+  display.write("rms vol:  ");
+  display.write(buf);
+  display.write("\n");
+  */
+  
   if (digitalRead(buttPin)==false) { // button pressed
     if (changingdelay) { // we stop changing, save the value
       EEPROM.write(0, mydelay/256);//high byte
