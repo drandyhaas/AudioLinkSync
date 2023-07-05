@@ -17,12 +17,12 @@
 #include <Adafruit_SSD1306.h>
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
-#define OLED_MOSI  22
-#define OLED_CLK   23
-#define OLED_DC    20
-#define OLED_CS    19
-#define OLED_RESET 21
-Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT,OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
+#define OLED_MOSI  17
+#define OLED_CLK   16
+#define OLED_DC    19
+#define OLED_CS    20
+#define OLED_RESET 18
+Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, OLED_MOSI, OLED_CLK, OLED_DC, OLED_RESET, OLED_CS);
 
 #include <Audio.h>
 #include <Wire.h>
@@ -49,14 +49,13 @@ AudioConnection          patchCord7(delay1, 0, peak1, 0);
 AudioConnection          patchCord8(delay1, 0, rms1, 0);
 // GUItool: end automatically generated code
 
-
 bool changingdelay = false;
 bool firstloop = true;
 short mydelay = 0; // delay in ms
 short maxdelay = 750; // max allowed delay
-const int ledPin = 13;
-const int knobPin = 18;
-const int buttPin = 17;
+#define ledPin  13
+#define knobPin 23
+#define buttPin 22
 
 void setup() {
   pinMode(ledPin, OUTPUT);
