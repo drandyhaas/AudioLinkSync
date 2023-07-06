@@ -15,7 +15,7 @@ PCB:
 
 ![Screenshot_20230627-143739](https://github.com/drandyhaas/AudioLinkSync/assets/13686048/cc174014-3fa5-45bc-a1f0-77dc1720f8c1)
 
-Prototype:
+Product:
 
-![PXL_20230628_235902143](https://github.com/drandyhaas/AudioLinkSync/assets/13686048/73f64da4-0b72-4b56-9368-bbb9caefe9d2)
+![PXL_20230706_005849022~2](https://github.com/drandyhaas/AudioLinkSync/assets/13686048/256f95ee-8c1b-4877-980d-8ba2e631c779)
 
