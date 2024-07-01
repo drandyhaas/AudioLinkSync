@@ -15,6 +15,10 @@ PCB:
 
 ![Screenshot_20230627-143739](https://github.com/drandyhaas/AudioLinkSync/assets/13686048/cc174014-3fa5-45bc-a1f0-77dc1720f8c1)
 
+
+![teensy_toslink_v1 2](https://github.com/drandyhaas/AudioLinkSync/assets/13686048/8b2f0c58-a93f-4113-b62e-3a8bb50ae1ae)
+
+
 Product:
 
 ![PXL_20230706_005849022~2](https://github.com/drandyhaas/AudioLinkSync/assets/13686048/256f95ee-8c1b-4877-980d-8ba2e631c779)
